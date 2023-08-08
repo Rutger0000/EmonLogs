@@ -1,0 +1,342 @@
+Starting update via service-runner-update.sh (v3.0) >
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/root        20G  2.6G   17G  14% /
+devtmpfs        430M     0  430M   0% /dev
+tmpfs           462M     0  462M   0% /dev/shm
+tmpfs           462M  6.3M  456M   2% /run
+tmpfs           5.0M  4.0K  5.0M   1% /run/lock
+tmpfs           462M     0  462M   0% /sys/fs/cgroup
+tmpfs            30M     0   30M   0% /tmp
+tmpfs           1.0M  4.0K 1020K   1% /var/lib/php/sessions
+tmpfs           1.0M     0  1.0M   0% /var/tmp
+/dev/mmcblk0p3  9.6G  3.8M  9.1G   1% /var/opt/emoncms
+/dev/mmcblk0p1  253M   49M  204M  20% /boot
+log2ram          50M  1.4M   49M   3% /var/log
+tmpfs            93M     0   93M   0% /run/user/1000
+- emonSD version: emonSD-10Nov22
+- supported images: emonSD-10Nov22 emonSD-21Jul21 emonSD-08May21 emonSD-24Jul20 emonSD-02Oct19 emonSD-17Oct19
+- emonSD base image check passed...continue update
+git pull /opt/openenergymonitor/EmonScripts
+  master
+* stable
+On branch stable
+Your branch is up to date with 'origin/stable'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	install/Mosquitto-PHP/
+	install/phpredis/
+
+nothing added to commit but untracked files present (use "git add" to track)
+From https://github.com/openenergymonitor/EmonScripts
+   a1c965e..eb6d0ec  stable     -> origin/stable
+   efb3b92..eb6d0ec  master     -> origin/master
+ * [new tag]         1.6.20     -> 1.6.20
+ * [new tag]         1.6.19     -> 1.6.19
+Updating a1c965e..eb6d0ec
+Fast-forward
+ docs/download.md        |  4 +--
+ emonupload2.py          | 88 ++++++++++++++++++++++++++++++++++++++++++-------
+ firmware_available.json | 68 +++++++++++---------------------------
+ install/mosquitto.sh    |  4 ++-
+ module.json             |  2 +-
+ 5 files changed, 102 insertions(+), 64 deletions(-)
+-------------------------------------------------------------
+Main Update Script
+-------------------------------------------------------------
+Date: Tue 8 Aug 16:14:23 CEST 2023
+EUID: 1000
+openenergymonitor_dir: /opt/openenergymonitor
+type: all
+serial_port: ttyAMA0
+firmware: none
+Reading package lists...
+Building dependency tree...
+Reading state information...
+python3-pip is already the newest version (18.1-5+rpt1).
+0 upgraded, 0 newly installed, 0 to remove and 5 not upgraded.
+Looking in indexes: https://pypi.org/simple, https://www.piwheels.org/simple
+Requirement already satisfied: redis in /usr/local/lib/python3.7/dist-packages (4.6.0)
+Requirement already satisfied: importlib-metadata>=1.0; python_version < "3.8" in /usr/local/lib/python3.7/dist-packages (from redis) (6.7.0)
+Requirement already satisfied: async-timeout>=4.0.2; python_full_version <= "3.11.2" in /usr/local/lib/python3.7/dist-packages (from redis) (4.0.2)
+Requirement already satisfied: typing-extensions; python_version < "3.8" in /usr/local/lib/python3.7/dist-packages (from redis) (4.7.1)
+Requirement already satisfied: zipp>=0.5 in /usr/local/lib/python3.7/dist-packages (from importlib-metadata>=1.0; python_version < "3.8"->redis) (3.15.0)
+Hardware detected: rfm2pi
+Running apt-get update
+Get:1 http://raspbian.raspberrypi.org/raspbian buster InRelease [15.0 kB]
+Get:2 http://archive.raspberrypi.org/debian buster InRelease [32.6 kB]
+Hit:3 https://deb.nodesource.com/node_18.x buster InRelease
+Hit:4 https://packages.sury.org/php buster InRelease
+Get:5 http://raspbian.raspberrypi.org/raspbian buster/main armhf Packages [13.0 MB]
+Get:6 http://archive.raspberrypi.org/debian buster/main armhf Packages [400 kB]
+Fetched 13.5 MB in 11s (1,279 kB/s)
+Reading package lists...
+git pull /opt/openenergymonitor/emonpi
+* master
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+Fetching origin
+Already up to date.
+git pull /opt/openenergymonitor/RFM2Pi
+* master
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+Fetching origin
+Already up to date.
+Start emonhub update script:
+-------------------------------------------------------------
+emonHub update
+-------------------------------------------------------------
+Enabling SPI for RFM69SPI
+Updating /opt/openenergymonitor/emonhub
+- current branch: stable
+- local changes: no
+- git fetch: Fetching origin
+Already on 'stable'
+- git checkout: Your branch is up to date with 'origin/stable'.
+- git pull: Already up to date.
+- database update: no changes
+- running module install/update script (user=pi)
+EmonHub directory: /opt/openenergymonitor/emonhub
+emonSD_pi_env provided in arg = /opt/openenergymonitor
+user provided as arg = pi
+installing or updating emonhub dependencies
+Reading package lists...
+Building dependency tree...
+Reading state information...
+python3-configobj is already the newest version (5.0.6-3).
+python3-pymodbus is already the newest version (2.1.0+dfsg-1).
+python3-serial is already the newest version (3.4-4).
+bluetooth is already the newest version (5.50-1.2~deb10u3+rpt1).
+libbluetooth-dev is already the newest version (5.50-1.2~deb10u3+rpt1).
+python3-pip is already the newest version (18.1-5+rpt1).
+python3-spidev is already the newest version (20200602~200721-1~buster).
+0 upgraded, 0 newly installed, 0 to remove and 6 not upgraded.
+Looking in indexes: https://pypi.org/simple, https://www.piwheels.org/simple
+Requirement already satisfied: paho-mqtt in /home/pi/.local/lib/python3.7/site-packages (1.6.1)
+Requirement already satisfied: requests in /usr/lib/python3/dist-packages (2.21.0)
+Requirement already satisfied: pybluez in /home/pi/.local/lib/python3.7/site-packages (0.23)
+Requirement already satisfied: py-sds011 in /home/pi/.local/lib/python3.7/site-packages (0.9)
+Requirement already satisfied: sdm_modbus in /home/pi/.local/lib/python3.7/site-packages (0.5.3)
+Requirement already satisfied: minimalmodbus in /home/pi/.local/lib/python3.7/site-packages (2.0.1)
+Requirement already satisfied: pyserial in /usr/lib/python3/dist-packages (from py-sds011) (3.4)
+Requirement already satisfied: pymodbus<3.0.0,>=2.4.0 in /home/pi/.local/lib/python3.7/site-packages (from sdm_modbus) (2.5.3)
+Requirement already satisfied: six>=1.15.0 in /home/pi/.local/lib/python3.7/site-packages (from pymodbus<3.0.0,>=2.4.0->sdm_modbus) (1.16.0)
+Looking in indexes: https://pypi.org/simple, https://www.piwheels.org/simple
+Collecting https://github.com/openenergymonitor/rpi-rfm69/archive/refs/tags/v0.3.0-oem-4.zip
+  Using cached https://github.com/openenergymonitor/rpi-rfm69/archive/refs/tags/v0.3.0-oem-4.zip
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+Requirement already satisfied (use --upgrade to upgrade): rpi-rfm69==0.3.4 from https://github.com/openenergymonitor/rpi-rfm69/archive/refs/tags/v0.3.0-oem-4.zip in /home/pi/.local/lib/python3.7/site-packages
+Requirement already satisfied: spidev in /usr/lib/python3/dist-packages (from rpi-rfm69==0.3.4) (3.5)
+Requirement already satisfied: RPI.GPIO in /home/pi/.local/lib/python3.7/site-packages (from rpi-rfm69==0.3.4) (0.7.1)
+Building wheels for collected packages: rpi-rfm69
+  Running setup.py bdist_wheel for rpi-rfm69: started
+  Running setup.py bdist_wheel for rpi-rfm69: finished with status 'done'
+  Stored in directory: /home/pi/.cache/pip/wheels/07/c1/a0/66ead383f6d79a027fdc44bf42664708a0e053c73534fc93f2
+Successfully built rpi-rfm69
+/etc/emonhub directory already exists
+Setting ownership of /var/log/emonhub to pi
+Setting ownership of /var/log/emonhub/emonhub.log to pi and permissions to 644
+Installing /usr/local/bin/emonhub symlink
+emonhub.service already installed
+- Service ActiveState=active
+- component updated
+
+Start emoncms update:
+-------------------------------------------------------------
+Update Emoncms Core
+-------------------------------------------------------------
+Updating /var/www/emoncms
+- current branch: stable
+- local changes: no
+- git fetch: Fetching origin
+Already on 'stable'
+- git checkout: Your branch is up to date with 'origin/stable'.
+- git pull: Already up to date.
+- database update: no changes
+- component updated
+-------------------------------------------------------------
+Update Emoncms Services
+-------------------------------------------------------------
+emoncms_mqtt.service already installed
+feedwriter.service already installed
+service-runner.service already installed
+
+Reloading systemctl deamon
+Restarting Services...
+- sudo systemctl restart feedwriter.service
+--- ActiveState=active ---
+- sudo systemctl restart emoncms_mqtt.service
+--- ActiveState=active ---
+- sudo systemctl restart emonhub.service
+--- ActiveState=active ---
+/opt/openenergymonitor/EmonScripts/sudoers.d/emoncms-rebootbutton: parsed OK
+emonPi emoncms admin reboot button sudoers updated
+
+-------------------------------------------------------------
+Update Emoncms Modules
+-------------------------------------------------------------
+Updating /var/www/emoncms/Modules/app
+- current branch: stable
+- local changes: no
+- git fetch: Fetching origin
+Already on 'stable'
+- git checkout: Your branch is up to date with 'origin/stable'.
+- git pull: Already up to date.
+- database update: no changes
+- component updated
+Updating /var/www/emoncms/Modules/config
+- current branch: stable
+- local changes: no
+- git fetch: Fetching origin
+Already on 'stable'
+- git checkout: Your branch is up to date with 'origin/stable'.
+- git pull: Already up to date.
+- database update: no changes
+- component updated
+Updating /var/www/emoncms/Modules/dashboard
+- current branch: stable
+- local changes: no
+- git fetch: Fetching origin
+Already on 'stable'
+- git checkout: Your branch is up to date with 'origin/stable'.
+- git pull: Already up to date.
+- database update: no changes
+- component updated
+Updating /var/www/emoncms/Modules/device
+- current branch: stable
+- local changes: no
+- git fetch: Fetching origin
+Already on 'stable'
+- git checkout: Your branch is up to date with 'origin/stable'.
+- git pull: Already up to date.
+- database update: no changes
+- component updated
+Updating /var/www/emoncms/Modules/graph
+- current branch: stable
+- local changes: no
+- git fetch: Fetching origin
+Already on 'stable'
+- git checkout: Your branch is up to date with 'origin/stable'.
+- git pull: Already up to date.
+- database update: no changes
+- component updated
+Updating /var/www/emoncms/Modules/setup
+- current branch: stable
+- local changes: no
+- git fetch: Fetching origin
+Already on 'stable'
+- git checkout: Your branch is up to date with 'origin/stable'.
+- git pull: Already up to date.
+- database update: no changes
+- component updated
+Updating /var/www/emoncms/Modules/wifi
+- current branch: stable
+- local changes: no
+- git fetch: Fetching origin
+Already on 'stable'
+- git checkout: Your branch is up to date with 'origin/stable'.
+- git pull: Already up to date.
+- database update: no changes
+- component updated
+Updating /opt/emoncms/modules/backup
+- current branch: stable
+- local changes: no
+- git fetch: Fetching origin
+Already on 'stable'
+- git checkout: Your branch is up to date with 'origin/stable'.
+- git pull: Already up to date.
+- database update: no changes
+- running module install/update script (user=pi)
+- config.cfg already exists, left unmodified
+- creating /etc/php/8.1/mods-available/emoncmsbackup.ini
+post_max_size = 3G
+upload_max_filesize = 3G
+upload_tmp_dir = /var/opt/emoncms/backup/uploads
+- phpenmod emoncmsbackup
+- restarting apache
+- component updated
+Updating /opt/emoncms/modules/demandshaper
+- current branch: stable
+- local changes: no
+- git fetch: Fetching origin
+Already on 'stable'
+- git checkout: Your branch is up to date with 'origin/stable'.
+- git pull: Already up to date.
+- database update: no changes
+- running module install/update script (user=pi)
+- reinstalling demandshaper.service
+- demandshaper service: ActiveState=active
+- component updated
+Updating /opt/emoncms/modules/postprocess
+- current branch: stable
+- local changes: no
+From https://github.com/emoncms/postprocess
+   53d5161..2b5c88a  master     -> origin/master
+- git fetch: Fetching origin
+Already on 'stable'
+- git checkout: Your branch is up to date with 'origin/stable'.
+- git pull: Already up to date.
+- database update: no changes
+- component updated
+Updating /opt/emoncms/modules/sync
+- current branch: stable
+- local changes: no
+From https://github.com/emoncms/sync
+   fcefe35..e1cc606  master     -> origin/master
+- git fetch: Fetching origin
+Already on 'stable'
+- git checkout: Your branch is up to date with 'origin/stable'.
+- git pull: Already up to date.
+- database update: no changes
+- component updated
+Updating /opt/emoncms/modules/usefulscripts
+- current branch: stable
+- local changes: no
+- git fetch: Fetching origin
+Already on 'stable'
+- git checkout: Your branch is up to date with 'origin/stable'.
+- git pull: Already up to date.
+- database update: no changes
+- component updated
+/opt/openenergymonitor/EmonScripts/sudoers.d/wifi-sudoers: parsed OK
+wifi sudoers entry updated
+
+-------------------------------------------------------------
+EmonPi LCD Update
+-------------------------------------------------------------
+Reading package lists...
+Building dependency tree...
+Reading state information...
+i2c-tools is already the newest version (4.1-1).
+python3-smbus is already the newest version (4.1-1).
+python3-gpiozero is already the newest version (1.6.2-1).
+python3-rpi.gpio is already the newest version (0.7.0-0.1~bpo10+4).
+0 upgraded, 0 newly installed, 0 to remove and 6 not upgraded.
+Looking in indexes: https://pypi.org/simple, https://www.piwheels.org/simple
+Requirement already satisfied: redis in /usr/local/lib/python3.7/dist-packages (4.6.0)
+Requirement already satisfied: paho-mqtt in /home/pi/.local/lib/python3.7/site-packages (1.6.1)
+Requirement already satisfied: xmltodict in /home/pi/.local/lib/python3.7/site-packages (0.13.0)
+Requirement already satisfied: requests in /usr/lib/python3/dist-packages (2.21.0)
+Requirement already satisfied: importlib-metadata>=1.0; python_version < "3.8" in /usr/local/lib/python3.7/dist-packages (from redis) (6.7.0)
+Requirement already satisfied: typing-extensions; python_version < "3.8" in /usr/local/lib/python3.7/dist-packages (from redis) (4.7.1)
+Requirement already satisfied: async-timeout>=4.0.2; python_full_version <= "3.11.2" in /usr/local/lib/python3.7/dist-packages (from redis) (4.0.2)
+Requirement already satisfied: zipp>=0.5 in /usr/local/lib/python3.7/dist-packages (from importlib-metadata>=1.0; python_version < "3.8"->redis) (3.15.0)
+- reinstalling emonPiLCD.service
+- installing emonPiLCD.service
+Created symlink /etc/systemd/system/multi-user.target.wants/emonPiLCD.service → /opt/openenergymonitor/emonpi/lcd/emonPiLCD.service.
+Created symlink /etc/systemd/system/emonPiLCD.service → /opt/openenergymonitor/emonpi/lcd/emonPiLCD.service.
+- Service ActiveState=active
+Stopping emonPiLCD service
+Display update message on LCD
+
+-------------------------------------------------------------
+System update done: Tue  8 Aug 16:16:26 CEST 2023
+-------------------------------------------------------------
+restarting service-runner
