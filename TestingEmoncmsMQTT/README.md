@@ -9,5 +9,7 @@ The Emonscripts install increases memory regularly when running. This happens al
 
 The EmonSD install only increases memory once after boot and stays constant after that even at 10 inputs every 10 seconds.
 
+![one input](emonSD_10Nov22/10_inputs_into_MQTT.png)
+
 For both tests, one input is logged to a feed every 10 seconds. The graphs and logs can be found in ```emonscripts_install/``` and ```emonSD_10Nov22/```.
 
